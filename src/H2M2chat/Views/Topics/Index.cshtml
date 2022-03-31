@@ -10,9 +10,12 @@
 
 
 <div class="container">
+    <form asp-controller="Topics" asp-action="Index" method="get">
     <div>
-        <input type="text" placeholder="Search Topics" class="search"/>
+        <input type="text" name="search" placeholder="Search Topics..." class="search"/>
+        <input type="submit" style="display:none"/>
     </div>
+    </form>
     <div id="page-content-container">
         <section class="Topicscontainer">
         @foreach (var item in Model) {
@@ -33,7 +36,7 @@
             @*<div>
                 <p>@Html.DisplayFor(modelItem => item.Description.Substring(0,item.Description.Length/10))..........</p>
             </div>*@
-
+            <br>
             <footer style="float: right">
               <a asp-action="Details" asp-route-id="@item.TopicId" class="idxbtn" >READ MORE</a>
             </footer>

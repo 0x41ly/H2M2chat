@@ -24,9 +24,20 @@ namespace H2M2chat.Controllers
         }
 
         // GET: Topics
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string search,string tag)
         {
-            return View(await _context.Topic.ToListAsync());
+            var Topics = from m in _context.Topic
+                         select m;
+            if (!String.IsNullOrEmpty(search))
+            {
+                Topics = Topics.Where(s => s.Title!.Contains(search));
+            }
+            if (!String.IsNullOrEmpty(tag))
+            {
+                Topics = Topics.Where(s => s.Tags!.Contains(tag));
+            }
+
+            return View(await Topics.ToListAsync());
         }
 
         // GET: Topics/Details/5
