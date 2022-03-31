@@ -1,0 +1,53 @@
+﻿@model IEnumerable<H2M2chat.Models.Topic>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+
+
+
+
+<div class="container">
+    <div>
+        <input type="text" placeholder="Search Topics" class="search"/>
+    </div>
+    <div id="page-content-container">
+        <section class="Topicscontainer">
+        @foreach (var item in Model) {
+          <article>
+            <header class="topic-meta-and-title">
+              <div class="topic-meta">
+                <time datetime=@Html.DisplayFor(modelItem => item.Created)>@Html.DisplayFor(modelItem => item.Created)</time>
+                <p class="author-name"><span class="author-name-date-padding">|</span>
+                  <a href="" rel="author">@Html.DisplayFor(modelItem => item.Creator)</a>
+                </p>
+              </div>
+              <h2><a class="topic-title" href="#">@Html.DisplayFor(modelItem => item.Title)</a></h2>
+            </header>
+    
+            @{
+                  await Html.RenderPartialAsync("_Tags",item);
+              }
+            @*<div>
+                <p>@Html.DisplayFor(modelItem => item.Description.Substring(0,item.Description.Length/10))..........</p>
+            </div>*@
+
+            <footer style="float: right">
+              <a asp-action="Details" asp-route-id="@item.TopicId" class="idxbtn" >READ MORE</a>
+            </footer>
+          </article>
+      }
+    </section>
+        @{
+            await Html.RenderPartialAsync("_SubColumn");
+        }
+
+
+
+    </div>
+</div>
+
+
+

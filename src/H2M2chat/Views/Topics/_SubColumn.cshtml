@@ -1,0 +1,169 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using System.Runtime.Caching
+
+
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+
+<div id="about-sub-column">
+      <!-- About community card -->
+      <div class="sub-cards theme first">
+        <div class="sub-card-header sub-card-div">
+          <p>About Community</p>
+          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="grey">
+            <path d="M0 0h24v24H0V0z" fill="none" />
+            <path d="M6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z" />
+          </svg>
+        </div>
+        <div class="sub-card-div">
+          <p>This community for sharing minds and discussions :3.</p>
+        </div>
+        <div class="sub-card-div">
+          <div class="sub-stats-div">
+            <p id="sub-stats-members">@UserManager.Users.Count()</p>
+            <p class="sub-stats-text">Members</p>
+          </div>
+
+          <div class="sub-stats-div">
+            <p id="sub-stats-online">@MemoryCache.Default.Where(kv => kv.Value.ToString() =="User").Count()</p>
+            <p class="sub-stats-text">Online</p>
+          </div>
+          <div>
+            <!-- Empty div for spacing -->
+          </div>
+        </div>
+        <div id="created-date-div" class="sub-card-div">
+          <p>Created Mar 15, 2022</p>
+          <a id="create-topic-button" data-bs-toggle="modal" data-bs-target="#exampleModal" type="button" href="" >Create Topic</a>
+           
+          @if (SignInManager.IsSignedIn(User))
+            {
+              {
+                H2M2chat.Models.Topic newtopic = new H2M2chat.Models.Topic();
+
+                await Html.RenderPartialAsync("_CreateTopic", newtopic);
+              }
+            }
+            else
+            {
+                 await Html.RenderPartialAsync("_LoginAlert");
+            }
+        </div>
+        
+
+      </div>
+      <!-- Rules card -->
+      <div class="sub-cards theme">
+        <div class="sub-card-header">
+          <p>Developer Pro Rules</p>
+          <ol id="rules-list">
+            <li class="rules-li">
+              <div>
+                <p>Be QUIET.</p>
+                <div>
+                  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#fff">
+                    <path d="M24 24H0V0h24v24z" fill="none" opacity=".87" />
+                    <path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6-1.41-1.41z" />
+                  </svg>
+                </div>
+              </div>
+            </li>
+            <li class="rules-li">
+              <div>
+                <p>NEVER reapet yourself. (DRY)</p>
+                <div>
+                  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#fff">
+                    <path d="M24 24H0V0h24v24z" fill="none" opacity=".87" />
+                    <path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6-1.41-1.41z" />
+                  </svg>
+                </div>
+              </div>
+            </li>
+            <li class="rules-li">
+              <div>
+                <p>Don't act fool.</p>
+                <div>
+                  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#fff">
+                    <path d="M24 24H0V0h24v24z" fill="none" opacity=".87" />
+                    <path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6-1.41-1.41z" />
+                  </svg>
+                </div>
+              </div>
+            </li>
+            <li class="rules-li">
+              <div>
+                <p>Don't make them track you.</p>
+                <div>
+                  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#fff">
+                    <path d="M24 24H0V0h24v24z" fill="none" opacity=".87" />
+                    <path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6-1.41-1.41z" />
+                  </svg>
+                </div>
+              </div>
+            </li>
+            <li class="rules-li">
+              <div>
+                <p>The sky is blue, and water is wet. You should know this. Also have a skillset.
+                </p>
+                <div>
+                  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#fff">
+                    <path d="M24 24H0V0h24v24z" fill="none" opacity=".87" />
+                    <path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6-1.41-1.41z" />
+                  </svg>
+                </div>
+              </div>
+            </li>
+            <li class="rules-li">
+              <div>
+                <p> <em>Stop</em> typing and listen to what im saying.</p>
+                <div>
+                  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#fff">
+                    <path d="M24 24H0V0h24v24z" fill="none" opacity=".87" />
+                    <path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6-1.41-1.41z" />
+                  </svg>
+                </div>
+              </div>
+            </li>
+            <li class="rules-li">
+              <div>
+                <p>Have you done the weekly check in?</p>
+                <div>
+                  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#fff">
+                    <path d="M24 24H0V0h24v24z" fill="none" opacity=".87" />
+                    <path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6-1.41-1.41z" />
+                  </svg>
+                </div>
+              </div>
+            </li>
+            <li class="rules-li">
+              <div>
+                <p><strong>MOST IMPORTANTLY:</strong> Nothing. I'm just kidding bleeh :P</p>
+                <div>
+                  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#fff">
+                    <path d="M24 24H0V0h24v24z" fill="none" opacity=".87" />
+                    <path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6-1.41-1.41z" />
+                  </svg>
+                </div>
+              </div>
+            </li>
+          </ol>
+        </div>
+      </div>
+      <!-- Moderators -->
+      <div class="sub-cards theme">
+        <div class="sub-card-header">
+          <p>Moderators</p>
+        </div>
+        @*<div>
+          <p id="message-the-mods">Message The Mods</p>
+        </div>*@
+        <div id="mod-names">
+          <p>Siki</p>
+          <p>Miki</p>
+          <!-- make a mod property in javascript that automatically fills this? -->
+        </div>
+        <div>
+        </div>
+      </div>
+</div>

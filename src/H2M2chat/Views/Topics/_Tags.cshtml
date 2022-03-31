@@ -1,0 +1,17 @@
+﻿@model H2M2chat.Models.Topic
+
+
+<div>
+    <span class="topic-tags">
+        @foreach (var tag in System.Net.WebUtility.UrlDecode(Model.Tags).Split(','))
+        {
+            <a href="#" rel="tag">@tag</a>   
+        }
+                                    
+     </span>
+</div>
+
+
+
+
+

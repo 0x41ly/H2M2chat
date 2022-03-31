@@ -1,0 +1,114 @@
+﻿@using Microsoft.AspNetCore.Identity
+@model H2M2chat.Models.Topic
+
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+
+<div class="container">
+    <div>
+        <a asp-action="Index"> &lt;&lt; Back to List</a>
+    </div>
+  <div id="page-content-container">  
+    <div class="topics-column">
+      <div id="topic-and-comments-container" class="topic-and-comments-container theme">
+        <div id="cristians-topic" class="topic-container">
+            <!--   <div class="upvote-column">
+            <div class="upvote-container theme">
+              <div>
+                <img id="upvote-icon-0" src="https://img.icons8.com/external-those-icons-fill-those-icons/24/FF4501/external-up-arrows-those-icons-fill-those-icons-2.png" />
+              </div>
+              <span class="upvote-counter">20</span>
+              <div>
+                <img id="downvote-icon-0" src="https://img.icons8.com/external-those-icons-fill-those-icons/24/818384/external-down-arrows-those-icons-fill-those-icons-2.png" />
+              </div>
+            </div>
+          </div> -->
+          <div class="topic-content-container">
+            <div class="topic-text-container">
+              <div class="username-container">
+                <p class="topiced-by">Topiced by @Html.DisplayFor(model => model.Creator) | @Html.DisplayFor(model => model.Created)</p>
+              </div>
+              <div class="topic-title-container">
+                <p class="topic-title">@Html.DisplayFor(model => model.Title)
+                </p>
+              </div>
+              @{
+                  await Html.RenderPartialAsync("_Tags",Model);
+              }
+              <div class="topic-description-container">
+                <p class="topic-description">@Html.DisplayFor(model => model.Description)
+                </p>
+              </div>
+              <hr>
+            </div>
+            
+          </div>
+        </div>
+         @if (SignInManager.IsSignedIn(User))
+            {
+            
+            await Html.RenderPartialAsync("_CreateComment", new Comment { TopicId = Model.TopicId, ParentId= Guid.Empty });
+          }
+
+        <div id="comment-container" class="comment-container">
+          @foreach (var comment in Model.Comments)
+
+          {
+          <div class="comment theme">
+            <div class="profile-column">
+              <img class="profile-picture" src="" alt="">
+              <div class="line">
+                <!-- This is the line -->
+              </div>
+            </div>
+            <div class="parent-comment-contents">
+              <div class="user-info">
+                <p class="">@Html.DisplayFor(modelItem => comment.Creator)</p>
+                <p>&#8226;</p>
+                <p>@Html.DisplayFor(modelItem => comment.Created)</p>
+              </div>
+              <div>
+                <p>@Html.DisplayFor(modelItem => comment.Message)</p>
+              </div>
+              
+              
+              @{
+                await Html.RenderPartialAsync("_SubComments", comment, new ViewDataDictionary(ViewData) { { "counter", 0 } });
+                }
+              @if (SignInManager.IsSignedIn(User))
+                {
+                await Html.RenderPartialAsync("_CreateComment", new Comment { TopicId = Model.TopicId, ParentId= comment.CommentId });
+                } 
+            </div>
+          </div>
+          }
+        </div>
+      </div>
+    </div>
+     @{
+            await Html.RenderPartialAsync("_SubColumn");
+     }
+   </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

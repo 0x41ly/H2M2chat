@@ -1,0 +1,47 @@
+﻿@page
+@using Microsoft.AspNetCore.Identity
+@model H2M2chat.Models.Comment
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+
+@{
+}
+
+
+@{
+
+    int counter =  (int)ViewData["counter"];
+    if(counter<=2)
+    {
+        counter = counter + 1;
+        foreach (var comment in Model.SubComments)
+        {
+            <div class="child-comment">
+                <div class="profile-column">
+                  <img class="profile-picture" src="" alt="">
+                  <div class="line">
+                    <!-- This is the line -->
+                  </div>
+                </div>
+                <div>
+                  <div class="user-info">
+                    <p class="">@Html.DisplayFor(modelItem => comment.Creator)</p>
+                    <p>&#8226;</p>
+                    <p>@Html.DisplayFor(modelItem => comment.Created)</p>
+                  </div>
+                  <div>
+                    <p id='slackbot-comment'>@Html.DisplayFor(modelItem => comment.Message)</p>
+                  </div>
+                </div>
+                @{
+                await Html.RenderPartialAsync("_SubComments", comment, new ViewDataDictionary(ViewData) { { "counter", counter } });
+                }
+                @if (SignInManager.IsSignedIn(User))
+                {
+                await Html.RenderPartialAsync("_CreateComment", new Comment { TopicId = Model.TopicId, ParentId= comment.CommentId });
+                } 
+            </div>
+        }
+    }
+}

@@ -1,0 +1,17 @@
+﻿
+@model H2M2chat.Models.Comment
+
+
+
+
+<form asp-action="Comment" asp-controller="Topics">
+    <input asp-for="TopicId" type="hidden" value="@Model.TopicId"/>
+    <input asp-for="ParentId" type="hidden" value="@Model.ParentId"/>
+    
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div>
+        <input asp-for="Message" type="text" placeholder="Type a comment......." class="comment"/>
+        <span asp-validation-for="Message" class="text-danger"></span>
+    </div>
+    <input type="submit" style="display:none"/>
+</form>
