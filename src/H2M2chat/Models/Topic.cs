@@ -28,7 +28,7 @@ namespace H2M2chat.Models
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd,hh:mm tt}", ApplyFormatInEditMode = true)]
         public DateTime Created { get; set; } = DateTime.Now;
 
-        public List<Comment> Comments = new List<Comment>();
+        public List<Comment> Comments = new();
 
 
     }

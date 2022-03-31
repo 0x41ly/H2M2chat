@@ -32,6 +32,6 @@ namespace H2M2chat.Models
         public DateTime Created { get; set; } = DateTime.Now;
         public virtual Topic? Topic { get; set; }
 
-        public  List<Comment> SubComments = new List<Comment>();
+        public List<Comment> SubComments = new();
     }
 }
