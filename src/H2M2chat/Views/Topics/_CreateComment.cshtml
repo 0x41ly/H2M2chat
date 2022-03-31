@@ -10,7 +10,7 @@
     
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <div>
-        <input asp-for="Message" type="text" placeholder="Type a comment......." class="comment"/>
+        <input asp-for="Message" type="text" placeholder="Type a comment......." class="comment" aria-required="true"/>
         <span asp-validation-for="Message" class="text-danger"></span>
     </div>
     <input type="submit" style="display:none"/>
