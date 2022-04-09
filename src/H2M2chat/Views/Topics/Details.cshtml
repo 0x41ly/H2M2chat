@@ -10,6 +10,12 @@
 
 
 <div class="container">
+    <form asp-controller="Topics" asp-action="Index" method="get">
+    <div>
+        <input type="text" name="search" placeholder="Search Topics..." class="search"/>
+        <input type="submit" style="display:none"/>
+    </div>
+    </form>
     <div>
         <a asp-action="Index"> &lt;&lt; Back to List</a>
     </div>
@@ -52,9 +58,10 @@
         </div>
          @if (SignInManager.IsSignedIn(User))
             {
-            
-            await Html.RenderPartialAsync("_CreateComment", new Comment { TopicId = Model.TopicId, ParentId= Guid.Empty });
-          }
+            <div class="Createcomment-div">
+               @{ await Html.RenderPartialAsync("_CreateComment", new Comment { TopicId = Model.TopicId, ParentId= Guid.Empty }); }
+            </div>
+            }
 
         <div id="comment-container" class="comment-container">
           @foreach (var comment in Model.Comments)
@@ -78,17 +85,21 @@
               </div>
               
               
-              @{
-                await Html.RenderPartialAsync("_SubComments", comment, new ViewDataDictionary(ViewData) { { "counter", 0 } });
+                @{
+                    await Html.RenderPartialAsync("_SubComments",comment);
                 }
               @if (SignInManager.IsSignedIn(User))
                 {
-                await Html.RenderPartialAsync("_CreateComment", new Comment { TopicId = Model.TopicId, ParentId= comment.CommentId });
+                    <div style="margin-bottom:20px;">
+                        
+                        @{await Html.RenderPartialAsync("_CreateComment", new Comment { TopicId = Model.TopicId, ParentId= comment.CommentId });}
+                    </div>
                 } 
             </div>
           </div>
           }
         </div>
+        <br>
       </div>
     </div>
      @{

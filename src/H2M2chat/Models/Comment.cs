@@ -26,12 +26,16 @@ namespace H2M2chat.Models
         public string? Message { get; set; }
 
         public string? Creator { get; set; }
+        
+        [Range(0, 2)]
+        public int level { get; set; }
 
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd,hh:mm tt}", ApplyFormatInEditMode = true)]
         public DateTime Created { get; set; } = DateTime.Now;
-        public virtual Topic? Topic { get; set; }
+        
 
         public List<Comment> SubComments = new();
+
     }
 }

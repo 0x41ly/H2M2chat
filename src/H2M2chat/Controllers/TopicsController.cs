@@ -40,6 +40,13 @@ namespace H2M2chat.Controllers
             return View(await Topics.ToListAsync());
         }
 
+        public async Task<IActionResult> Comments()
+        {
+            
+
+            return View(await _context.Comment.ToListAsync());
+        }
+
         // GET: Topics/Details/5
         public async Task<IActionResult> Details(Guid? id)
         {
@@ -50,10 +57,26 @@ namespace H2M2chat.Controllers
 
             var topic = await _context.Topic
                 .FirstOrDefaultAsync(m => m.TopicId == id);
+            
             if (topic == null)
             {
                 return NotFound();
             }
+            var comments = from m in _context.Comment
+                           select m;
+            comments = comments.Where(s => s.TopicId == id );
+
+            topic.Comments = comments.Where(s => s.level == 0).ToList();
+            foreach (var comment in topic.Comments)
+            {
+                comment.SubComments = comments.Where(s => s.level == 1 && s.ParentId==comment.CommentId).ToList();
+                foreach(var subComment in comment.SubComments)
+                {
+                    subComment.SubComments = comments.Where(s => s.level == 2 && s.ParentId == subComment.CommentId).ToList();
+                }
+            }
+
+
 
             return View(topic);
         }
@@ -100,9 +123,11 @@ namespace H2M2chat.Controllers
                 comment.Message = System.Net.WebUtility.UrlEncode(comment.Message);
                 if (comment.ParentId == Guid.Empty)
                 {
+                    comment.level = 0;
                     var topic = await _context.Topic
                     .FirstOrDefaultAsync(m => m.TopicId == comment.TopicId);
                     topic.Comments.Add(comment);
+                    
                     _context.Update(topic);
                     
                 }
@@ -110,10 +135,16 @@ namespace H2M2chat.Controllers
                 {
                     var subcomment = await _context.Comment
                    .FirstOrDefaultAsync(m => m.CommentId == comment.ParentId);
-                    comment.SubComments.Add(subcomment);
-                    _context.Update(comment);
+                    comment.level = subcomment.level + 1;
+                    if (comment.level == 3)
+                    {
+                        return Redirect($"~/Topics/Details/{comment.TopicId}");
+                    }
+                    subcomment.SubComments.Add(comment);
+                    _context.Update(subcomment);
 
                 }
+                _context.Comment.Add(comment);
                 await _context.SaveChangesAsync();
                 return Redirect($"~/Topics/Details/{comment.TopicId}");
 
