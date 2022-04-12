@@ -169,43 +169,55 @@ namespace H2M2chat.Controllers
                 return NotFound();
             }
             return View(topic);
-        }
+        } */
 
         // POST: Topics/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("TopicId,Title,Creator,Description,Tags,Created")] Topic topic)
+        public async Task<IActionResult> Edit(Guid? TopicId,String Title,String Description,String Tags)
         {
-            if (id != topic.TopicId)
-            {
-                return NotFound();
-            }
 
-            if (ModelState.IsValid)
+            
+            var topic = await _context.Topic
+                .FirstOrDefaultAsync(m => m.TopicId == TopicId);
+            topic.Description = Description;
+            topic.Tags = Tags;
+            topic.Title = Title;
+
+            if (TopicId != null)
             {
-                try
+                if (topic.Creator == User.Identity.Name)
                 {
-                    _context.Update(topic);
-                    await _context.SaveChangesAsync();
+                    
+                    try
+                    {
+                        _context.Update(topic);
+                        await _context.SaveChangesAsync();
+                    }
+                    catch (DbUpdateConcurrencyException)
+                    {
+                        if (!TopicExists(topic.TopicId))
+                        {
+                            return NotFound();
+                        }
+                        else
+                        {
+                            throw;
+                        }
+                    }
+                    return Redirect($"~/Topics/Details/{topic.TopicId}");
                 }
-                catch (DbUpdateConcurrencyException)
+                else
                 {
-                    if (!TopicExists(topic.TopicId))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    return Forbid("Not in my website :3");
                 }
-                return RedirectToAction(nameof(Index));
+                
             }
-            return View(topic);
+            return NotFound(); ;
         }
-
+        /*
         // GET: Topics/Delete/5
         public async Task<IActionResult> Delete(Guid? id)
         {
@@ -222,18 +234,43 @@ namespace H2M2chat.Controllers
             }
 
             return View(topic);
-        }
+        }*/
 
         // POST: Topics/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(Guid id)
+        public async Task<IActionResult> DeleteConfirmed(Guid? TopicId)
         {
-            var topic = await _context.Topic.FindAsync(id);
-            _context.Topic.Remove(topic);
-            await _context.SaveChangesAsync();
+            if (TopicId == null)
+            {
+                Console.WriteLine("id is null");
+                return NotFound();
+            }
+
+            var topic = await _context.Topic
+                .FirstOrDefaultAsync(m => m.TopicId == TopicId);
+
+            if (topic == null)
+            {
+                return NotFound();
+            }
+            
+            if (topic.Creator == User.Identity.Name)
+            {
+                var comments = from m in _context.Comment
+                               select m;
+                comments = comments.Where(s => s.TopicId == TopicId);
+                _context.Comment.RemoveRange(comments);
+                _context.Topic.Remove(topic);
+                await _context.SaveChangesAsync();
+            }
+            else
+            {
+                return Forbid("Not in my website :3");
+            }
+
             return RedirectToAction(nameof(Index));
-        }*/
+        }
 
         private bool TopicExists(Guid id)
         {

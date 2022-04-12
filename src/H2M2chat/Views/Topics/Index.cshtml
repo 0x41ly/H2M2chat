@@ -28,11 +28,13 @@
                 </p>
               </div>
               <h2><a class="topic-title" href="#">@Html.DisplayFor(modelItem => item.Title)</a></h2>
-            </header>
-    
-            @{
+
+              @{
                   await Html.RenderPartialAsync("_Tags",item);
               }
+            </header>
+    
+            
             @*<div>
                 <p>@Html.DisplayFor(modelItem => item.Description.Substring(0,item.Description.Length/10))..........</p>
             </div>*@

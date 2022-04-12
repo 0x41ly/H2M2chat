@@ -23,6 +23,8 @@ namespace H2M2chat.Models
         public string Description { get; set; } = "";
     
         [Required]
+        [RegularExpression("@(([1-9a-zA-z_-]),?([1-9a-zA-z_-])?,?([1-9a-zA-z_-])?,?([1-9a-zA-z_-])?,?([1-9a-zA-z])?)",
+         ErrorMessage = "Max 5 tags")]
         public string Tags { get; set; } = "";
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd,hh:mm tt}", ApplyFormatInEditMode = true)]

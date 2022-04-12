@@ -461,7 +461,7 @@ body {
 
 
 .topic-tags {
-    padding: 15px;
+    padding: 1px;
 }
 
     .topic-tags a {
@@ -478,6 +478,7 @@ body {
         -webkit-transition-property: color,background-color;
         transition-property: color,background-color;
         margin-bottom: 5px;
+        margin-right: 5px;
     }
 
     .topic-tags a {
@@ -612,4 +613,10 @@ footer {
     .topic-description {
         padding: 0 3rem;
     }
+}
+
+.username-container {
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-between;
 }

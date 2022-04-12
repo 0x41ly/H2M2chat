@@ -50,7 +50,7 @@ namespace H2M2chat.Migrations
 
                     b.HasKey("CommentId");
 
-                    b.ToTable("Comment");
+                    b.ToTable("Comment", (string)null);
                 });
 
             modelBuilder.Entity("H2M2chat.Models.Topic", b =>
@@ -80,7 +80,7 @@ namespace H2M2chat.Migrations
 
                     b.HasKey("TopicId");
 
-                    b.ToTable("Topic");
+                    b.ToTable("Topic", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
