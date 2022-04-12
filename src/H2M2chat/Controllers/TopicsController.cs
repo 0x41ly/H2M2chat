@@ -180,14 +180,15 @@ namespace H2M2chat.Controllers
         {
 
             
-            var topic = await _context.Topic
-                .FirstOrDefaultAsync(m => m.TopicId == TopicId);
-            topic.Description = Description;
-            topic.Tags = Tags;
-            topic.Title = Title;
+            
 
             if (TopicId != null)
             {
+                var topic = await _context.Topic
+                .FirstOrDefaultAsync(m => m.TopicId == TopicId);
+                topic.Description = System.Net.WebUtility.HtmlEncode(Description);
+                topic.Tags = System.Net.WebUtility.HtmlEncode(Tags);
+                topic.Title = System.Net.WebUtility.HtmlEncode(Title);
                 if (topic.Creator == User.Identity.Name)
                 {
                     
