@@ -104,10 +104,10 @@ namespace H2M2chat.Controllers
                 topic.Creator = User.Identity.Name;
                 _context.Add(topic);
                 await _context.SaveChangesAsync();
-                Console.WriteLine(topic.TopicId);
+                
                 return Redirect($"~/Topics/Details/{topic.TopicId}");
             }
-            Console.WriteLine(ModelState.Values.SelectMany(v => v.Errors));
+            
             return Redirect("~/");
         }
 
@@ -150,7 +150,7 @@ namespace H2M2chat.Controllers
 
             }
 
-            Console.WriteLine(ModelState.Values.SelectMany(v => v.Errors));
+            /*Console.WriteLine(ModelState.Values.SelectMany(v => v.Errors));*/
             return Redirect("~/");
         }
 
@@ -244,7 +244,7 @@ namespace H2M2chat.Controllers
         {
             if (TopicId == null)
             {
-                Console.WriteLine("id is null");
+                
                 return NotFound();
             }
 
