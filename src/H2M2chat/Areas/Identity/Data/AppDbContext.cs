@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using H2M2chat.Models;
@@ -23,4 +23,7 @@ public class AppDbContext : IdentityDbContext<IdentityUser>
     public DbSet<H2M2chat.Models.Topic> Topic { get; set; }
 
     public DbSet<H2M2chat.Models.Comment> Comment { get; set; }
+
+    public DbSet<H2M2chat.Models.Room> Room { get; set; }
+    public DbSet<H2M2chat.Models.Message> Message { get; set; }
 }

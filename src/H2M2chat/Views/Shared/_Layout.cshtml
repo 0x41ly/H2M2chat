@@ -1,4 +1,9 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -7,6 +12,7 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/H2M2chat.styles.css" asp-append-version="true" />
+    <link href="~/lib/font-awesome/css/all.css" rel="stylesheet" asp-append-version="true"/>
 </head>
 <body>
     <header>
@@ -26,6 +32,9 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Topics" asp-action="Index">Topic Discussion</a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="ChatRoom" asp-action="Index">ChatRoom</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
                     </ul>
@@ -36,6 +45,12 @@
     </header>
     <div class="container">
         <main role="main" class="pb-3">
+           @* if (SignInManager.IsSignedIn(User))
+            {
+                @{await Html.RenderPartialAsync("_Chats");}
+            }*@
+              
+            
             @RenderBody()
         </main>
     </div>

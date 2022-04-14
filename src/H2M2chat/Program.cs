@@ -2,10 +2,14 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using H2M2chat.Data;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using H2M2chat.Hubs;
 
 
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddRazorPages();
+builder.Services.AddSignalR();
 var connectionString = builder.Configuration.GetConnectionString("AppDbContextConnection");
 
 builder.Services.AddDbContext<AppDbContext>(options =>
@@ -75,4 +79,5 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 app.MapRazorPages();
+app.MapHub<ChatHub>("/chatHub");
 app.Run();

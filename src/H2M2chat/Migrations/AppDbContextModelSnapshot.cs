@@ -50,7 +50,55 @@ namespace H2M2chat.Migrations
 
                     b.HasKey("CommentId");
 
-                    b.ToTable("Comment", (string)null);
+                    b.ToTable("Comment");
+                });
+
+            modelBuilder.Entity("H2M2chat.Models.Message", b =>
+                {
+                    b.Property<Guid>("MessageId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnOrder(0);
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("RoomId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Sender")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("MessageId");
+
+                    b.ToTable("Message");
+                });
+
+            modelBuilder.Entity("H2M2chat.Models.Room", b =>
+                {
+                    b.Property<Guid>("RoomId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnOrder(0);
+
+                    b.Property<string>("About")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<bool>("IsGC")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsVisable")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid>("RoomIcon")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("RoomId");
+
+                    b.ToTable("Room");
                 });
 
             modelBuilder.Entity("H2M2chat.Models.Topic", b =>
@@ -80,7 +128,7 @@ namespace H2M2chat.Migrations
 
                     b.HasKey("TopicId");
 
-                    b.ToTable("Topic", (string)null);
+                    b.ToTable("Topic");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
