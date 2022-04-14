@@ -66,7 +66,7 @@ namespace H2M2chat.Controllers
                 room.RoomIcon = Guid.NewGuid();
                 _context.Add(room);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return Redirect($"~/ChatRoom/Details/{room.RoomId}");
             }
             return View(room);
         }
@@ -119,7 +119,7 @@ namespace H2M2chat.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return Redirect($"~/ChatRoom/Details/{room.RoomId}");
             }
             return View(room);
         }
