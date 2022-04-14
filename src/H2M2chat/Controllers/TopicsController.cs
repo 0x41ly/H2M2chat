@@ -40,13 +40,7 @@ namespace H2M2chat.Controllers
             return View(await Topics.ToListAsync());
         }
 
-        public async Task<IActionResult> Comments()
-        {
-            
-
-            return View(await _context.Comment.ToListAsync());
-        }
-
+        
         // GET: Topics/Details/5
         public async Task<IActionResult> Details(Guid? id)
         {
@@ -126,9 +120,9 @@ namespace H2M2chat.Controllers
                     comment.level = 0;
                     var topic = await _context.Topic
                     .FirstOrDefaultAsync(m => m.TopicId == comment.TopicId);
-                    topic.Comments.Add(comment);
+                    /*topic.Comments.Add(comment);
                     
-                    _context.Update(topic);
+                    _context.Update(topic);*/
                     
                 }
                 else
@@ -140,8 +134,8 @@ namespace H2M2chat.Controllers
                     {
                         return Redirect($"~/Topics/Details/{comment.TopicId}");
                     }
-                    subcomment.SubComments.Add(comment);
-                    _context.Update(subcomment);
+                    /*subcomment.SubComments.Add(comment);
+                    _context.Update(subcomment);*/
 
                 }
                 _context.Comment.Add(comment);
