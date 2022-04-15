@@ -12,7 +12,9 @@
         if (TempData["Message"] != null)
         {
 
-            <p style="font-family: Arial; font-size: 5px; font-weight: 200; color: red">@TempData["Message"]</p>
+            <div class="alert alert-success" role="alert">
+                @TempData["Message"]
+            </div>
         }
         <table>
             <tr>

