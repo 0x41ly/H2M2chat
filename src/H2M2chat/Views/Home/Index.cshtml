@@ -1,10 +1,61 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model IEnumerable<ObjFile>
+@{
+    ViewData["Title"] = "Home | File Hosting";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
 
- 
+<div style="border: 1px solid #DED8D8; width: 1000px; height: 1000px; font-family: Arial ">
+
+    @using (@Html.BeginForm(null, null, FormMethod.Post,
+     new { enctype = "multipart/form-data" }))
+    {
+        if (TempData["Message"] != null)
+        {
+
+            <p style="font-family: Arial; font-size: 5px; font-weight: 200; color: red">@TempData["Message"]</p>
+        }
+        <table>
+            <tr>
+                <td style="padding-bottom: 5px" colspan="3">
+                    <h2 style="color: #47bfed">FILE UPLOAD AND DOWNLOAD  </h2>
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 50px;">
+                    <b style="color: #FF5722">File:</b>
+                </td>
+                <td>
+                    <input type="file" name="files" id="files" multiple="multiple" />
+                </td>
+                <td>
+                    <input type="submit" class="btn" name="submit" />
+                </td>
+            </tr>
+
+        </table>
+
+    }
+    <table class="gridborder row-borderhover order-column dataTable no-footer">
+        <tr>
+            <th class="sorting_asc">
+                @Html.DisplayNameFor(model => model.File)
+            </th>
+
+            <th class="sorting"></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td class="sorting_1">
+                    @Html.DisplayFor(modelItem => item.File)
+                </td>
+
+                <th class="sorting">
+                    @Html.ActionLink("Download", "Download", new { fileName = item.File })
+                </th>
+            </tr>
+
+        }
+    </table>
+</div>
