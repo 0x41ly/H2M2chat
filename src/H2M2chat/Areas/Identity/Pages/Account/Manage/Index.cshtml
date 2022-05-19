@@ -1,11 +1,22 @@
 ﻿@page
 @model IndexModel
+<style>
+.prof{
+        position: relative;
+    top: 69px;
+    right: -115px;
+}    
+
+</style>
+
+
 @{
     ViewData["Title"] = "Profile";
     ViewData["ActivePage"] = ManageNavPages.Index;
 }
 
-<h3>@ViewData["Title"]</h3>
+<div class="prof">
+
 <partial name="_StatusMessage" for="StatusMessage" />
 <div class="row">
     <div class="col-md-6">
@@ -28,3 +39,4 @@
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
 }
+</div>

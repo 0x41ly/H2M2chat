@@ -4,37 +4,68 @@
 @{
     ViewData["Title"] = "Log in";
 }
+<style>
+    .user-p{    position: relative;
+    top: 156px;
+    right: -18px;
 
-<h1>@ViewData["Title"]</h1>
+    }
+.phot {
+    position: relative;
+    right: -733px;
+    top: -104px;
+    width: 705px;
+    height: 385px;
+    background: url(/Images/photo6030483582708987988.jpg);
+}
+</style>
+<h1 style="position: relative;top: 145px;right: -11px;">@ViewData["Title"]</h1>
+
 <div class="row">
     <div class="col-md-4">
-        <section>
+        @*<section>*@
             <form id="account" method="post">
-                <h2>Use a local account to log in.</h2>
+                <h2 style="position: relative;top: 163px;right: -13px;">Use a local account to log in.</h2>
                 <hr />
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <div class="form-floating">
-                    <input asp-for="Input.UserName" class="form-control" autocomplete="username" aria-required="true" />
-                    <label asp-for="Input.UserName" class="form-label"></label>
-                    <span asp-validation-for="Input.UserName" class="text-danger"></span>
-                </div>
-                <div class="form-floating">
-                    <input asp-for="Input.Password" class="form-control" autocomplete="current-password" aria-required="true" />
-                    <label asp-for="Input.Password" class="form-label"></label>
-                    <span asp-validation-for="Input.Password" class="text-danger"></span>
-                </div>
+                <div class="user-p">
+                    <div class="form-floating">
+                        <input asp-for="Input.UserName" class="form-control" autocomplete="username" aria-required="true" />
+                        <label asp-for="Input.UserName" class="form-label"></label>
+                        <span asp-validation-for="Input.UserName" class="text-danger"></span>
+                    </div>
+                
+               
+                    <div class="form-floating">
+                        <input asp-for="Input.Password" class="form-control" autocomplete="current-password" aria-required="true" />
+                        <label asp-for="Input.Password" class="form-label"></label>
+                        <span asp-validation-for="Input.Password" class="text-danger"></span>
+                 
+                     </div>
+
+                 
                 <div>
-                    <div class="checkbox">
+               
+                    <div class="checkbox"style="position: relative;top: 16px;">
                         <label asp-for="Input.RememberMe" class="form-label">
                             <input class="form-check-input" asp-for="Input.RememberMe" />
                             @Html.DisplayNameFor(m => m.Input.RememberMe)
                         </label>
+                   </div>
+                 
+                </div>
+               
+             
+                    <div>
+                        <button id="login-submit" type="submit"
+                        class="w-100 btn btn-lg btn-primary" style="position: relative;top: 20px;right: 7px;">Log in</button>
                     </div>
                 </div>
-                <div>
-                    <button id="login-submit" type="submit" class="w-100 btn btn-lg btn-primary">Log in</button>
-                </div>
-                <div>
+                    <div class ="phot">
+
+                    </div>
+               
+                <div style="position: relative;top: -184px;right: -24px;">
                     <p>
                         <a id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a>
                     </p>
@@ -46,11 +77,11 @@
                     </p>
                 </div>
             </form>
-        </section>
+        @*</section>*@
     </div>
     </div>
-</div>
 
+@*<link rel="stylesheet" href="~/css/Register.css" asp-append-version="true" />*@
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
 }

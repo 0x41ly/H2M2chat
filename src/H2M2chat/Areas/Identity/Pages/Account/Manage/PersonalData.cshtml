@@ -4,8 +4,17 @@
     ViewData["Title"] = "Personal Data";
     ViewData["ActivePage"] = ManageNavPages.PersonalData;
 }
+<style>
+.per-data{
+        position: relative;
+    top: 76px;
+    right: -109px;
+}
+</style>
 
-<h3>@ViewData["Title"]</h3>
+<div class="per-data">
+
+
 
 <div class="row">
     <div class="col-md-6">
@@ -25,3 +34,4 @@
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
 }
+</div>

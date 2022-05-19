@@ -1,6 +1,96 @@
-﻿@{
-    ViewData["Title"] = "Privacy Policy";
+﻿@model IEnumerable<ObjFile>
+@{
+    ViewData["Title"] = "Home | File Hosting";
 }
-<h1>@ViewData["Title"]</h1>
 
-<p>Use this page to detail your site's privacy policy.</p>
+@if (TempData["Message"] != null)
+        {
+
+            <div class="alert alert-success fade show" role="alert">
+                @TempData["Message"]
+            </div>
+        }
+<style>
+.dow-up{
+    position:relative;
+    top: -470px;
+    right: -24px;
+    font-size: larger;
+}
+.pic {
+position: relative;
+    right: -14px;
+    top: 78px;
+    width: 1487px;
+    height: 612px;
+    opacity: 18%;
+    background: url(/Images/Screenshot_20220518-223652_Chrome.png);
+     }
+.choose1{
+   position: relative;
+   top: 130px;
+   right: -23px;
+}
+</style>
+<div style="border: 1px solid #DED8D8;    width: 1502px; height: 785px; font-family: Arial ">
+    <form asp-action="upload" method="POST">
+                <div class ="pic">
+
+                </div>
+        
+       <table>
+            <tr>
+                <td style="padding-bottom: 5px" colspan="3">
+                    <h2 style="position: relative;color: #1a1d94;font-family: ui-serif;font-size: -webkit-xxx-large;right: -450px;top: -521px;">Download & Upload your files   </h2>
+                </td>
+            </tr>
+
+            
+            <tr style="position: relative;top: -489px;right: -26px;">
+                <div class=choose1>
+
+                <td style="width: 168px;">
+                    <b style="color: #b82c00;font-size: large;">File</b>
+                </td>
+                <td>
+                    <input type="file" name="file" id="files" multiple="multiple" />
+                </td>
+                <td>
+                    <input type="submit" class="btn" name="submit" style="position: relative;background: #00f050;"/>
+                </td>
+                </div>
+            </tr>
+            
+
+        </table>
+
+        <div class="dow-up">
+
+        
+
+    </form>
+    <table class="gridborder row-borderhover order-column dataTable no-footer">
+        <tr>
+            <th class="sorting_asc">
+                @Html.DisplayNameFor(model => model.File)
+            </th>
+
+            <th class="sorting"></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td class="sorting_1">
+                    @Html.DisplayFor(modelItem => item.File)
+                </td>
+
+                <th class="sorting"style="position: relative;right: -107px;">
+                    @Html.ActionLink("Download", "Download", new { fileName = item.File })
+                </th>
+            </tr>
+
+        }
+    </table>
+</div>
+</div>
