@@ -83,9 +83,44 @@ public class HomeController : Controller
         TempData["Message"] = "files uploaded successfully";
         return RedirectToAction("Index");
     }
+    [HttpPost]
+    public async Task<ActionResult> upload(IFormFile file)
+    {
+       
+        
+
+            if (file.Length > 0)
+            {
+                string webRootPath = _webHostEnvironment.WebRootPath + "/Files";
+                var fileName = Path.GetFileName(file.FileName);  //returns the file name and extision of the file path                                                      
+                string? filePath = Path.Combine(webRootPath,
+                                                fileName);   //gives us the ability to add more than one file (it compines two strings into a path)
+                using (Stream fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    await file.CopyToAsync(fileStream);
+                }
+                // saves the content of the uploaded files
+            }
+        
+        TempData["Message"] = "files uploaded successfully";
+        return RedirectToAction("Index");
+    }
     public IActionResult Privacy()
     {
-        return View();
+
+        string webRootPath = _webHostEnvironment.WebRootPath;
+        List<ObjFile> ObjFiles = new List<ObjFile>();
+        foreach (string strfile in Directory.GetFiles(Path.Combine(webRootPath, "Files")))
+        {
+            FileInfo fi = new FileInfo(strfile);
+            ObjFile obj = new ObjFile();
+            obj.File = fi.Name;
+            obj.Size = fi.Length;
+            obj.Type = GetFileTypeByExtension(fi.Extension);
+            ObjFiles.Add(obj);
+        }
+
+        return View(ObjFiles);
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

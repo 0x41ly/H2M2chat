@@ -2,62 +2,38 @@
 @{
     ViewData["Title"] = "Home | File Hosting";
 }
+  <section id="hero">
 
-@if (TempData["Message"] != null)
-        {
-
-            <div class="alert alert-success fade show" role="alert">
-                @TempData["Message"]
+    <div class="container">
+      <div class="row justify-content-between">
+        <div class="col-lg-7 pt-5 pt-lg-0 order-2 order-lg-1 d-flex align-items-center">
+          <div data-aos="zoom-out">
+            <h1>We made your chats more <span>Comfortable</span></h1>
+            <div class="text-center text-lg-start">
+              <a href="/Identity/Account/Register" class="btn-get-started scrollto">Get Started</a>
             </div>
-        }
-<div style="border: 1px solid #DED8D8; width: 1000px; height: 1000px; font-family: Arial ">
+          </div>
+        </div>
+        <div class="col-lg-4 order-1 order-lg-2 hero-img" data-aos="zoom-out" data-aos-delay="300">
+          <img src="~/assets/img/hero.png" class="img-fluid animated" alt="">
+        </div>
+      </div>
+    </div>
 
-    @using (@Html.BeginForm(null, null, FormMethod.Post,
-     new { enctype = "multipart/form-data" }))
-    {
-        
-        <table>
-            <tr>
-                <td style="padding-bottom: 5px" colspan="3">
-                    <h2 style="color: #47bfed">FILE UPLOAD AND DOWNLOAD  </h2>
-                </td>
-            </tr>
-            <tr>
-                <td style="width: 50px;">
-                    <b style="color: #FF5722">File:</b>
-                </td>
-                <td>
-                    <input type="file" name="files" id="files" multiple="multiple" />
-                </td>
-                <td>
-                    <input type="submit" class="btn" name="submit" />
-                </td>
-            </tr>
+    <svg class="hero-waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28 " preserveAspectRatio="none">
+      <defs>
+        <path id="wave-path" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z">
+       </defs>
+      <g class="wave1">
+        <use xlink:href="#wave-path" x="50" y="3" fill="rgba(255,255,255, .1)">
+       </g>
+      <g class="wave2">
+        <use xlink:href="#wave-path" x="50" y="0" fill="rgba(255,255,255, .2)">
+       </g>
+      <g class="wave3">
+        <use xlink:href="#wave-path" x="50" y="9" fill="#fff">
+       </g>
+    </svg>
 
-        </table>
-
-    }
-    <table class="gridborder row-borderhover order-column dataTable no-footer">
-        <tr>
-            <th class="sorting_asc">
-                @Html.DisplayNameFor(model => model.File)
-            </th>
-
-            <th class="sorting"></th>
-        </tr>
-
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td class="sorting_1">
-                    @Html.DisplayFor(modelItem => item.File)
-                </td>
-
-                <th class="sorting">
-                    @Html.ActionLink("Download", "Download", new { fileName = item.File })
-                </th>
-            </tr>
-
-        }
-    </table>
-</div>
+  </section><!-- End Hero -->
+  <link rel="stylesheet" href="~/assets/css/style.css" asp-append-version="true" />

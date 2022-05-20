@@ -8,32 +8,17 @@
     ViewData["Title"] = "Details";
 }
 
+<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 
-<div class="container">
-    <form asp-controller="Topics" asp-action="Index" method="get">
-    <div>
-        <input type="text" name="search" placeholder="Search Topics..." class="search"/>
-        <input type="submit" style="display:none"/>
-    </div>
-    </form>
-    <div>
-        <a asp-action="Index"> &lt;&lt; Back to List</a>
+<div class="container" style="position: relative;top: 81px;">
+    <div style="position: relative;right: -35px;top: 15px;">
+        <button type="button" class="btn btn-primary">
+        <a asp-action="Index"> &lt;&lt; Back to List</a></button>
     </div>
   <div id="page-content-container">  
     <div class="topics-column">
       <div id="topic-and-comments-container" class="topic-and-comments-container theme">
         <div id="cristians-topic" class="topic-container">
-            <!--   <div class="upvote-column">
-            <div class="upvote-container theme">
-              <div>
-                <img id="upvote-icon-0" src="https://img.icons8.com/external-those-icons-fill-those-icons/24/FF4501/external-up-arrows-those-icons-fill-those-icons-2.png" />
-              </div>
-              <span class="upvote-counter">20</span>
-              <div>
-                <img id="downvote-icon-0" src="https://img.icons8.com/external-those-icons-fill-those-icons/24/818384/external-down-arrows-those-icons-fill-those-icons-2.png" />
-              </div>
-            </div>
-          </div> -->
           <div class="topic-content-container">
 
             <div class="topic-text-container">

@@ -34,10 +34,13 @@ body {
 }
 
 .search {
-    width: 94%;
+    width: 60%;
     padding: 10px;
-    margin: 50px;
-    border-radius: 50px
+    margin: 53px;
+    border-radius: 51px;
+    position: relative;
+    top: 114px;
+    right: -34px;
 }
 
 #container {
